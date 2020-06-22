@@ -5,4 +5,4 @@ Airbnb Build Week
 
 API documentation: https://seanmx96-airbnb-optimal-price.herokuapp.com/swagger-ui.html
 
-BASE URL: 
+BASE URL: https://seanmx96-airbnb-optimal-price.herokuapp.com/
