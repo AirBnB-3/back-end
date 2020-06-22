@@ -141,7 +141,7 @@ public class UserServiceImplTest
     }
 
     //    @Transactional
-    //    @WithUserDetails("lanakane")
+    //    @WithUserDetails("admin")
     //    @Test
     //    public void G_update()
     //    {

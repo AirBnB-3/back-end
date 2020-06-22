@@ -112,6 +112,8 @@
     </dependencies>
 
     <build>
+        <finalName>seanmx96-airbnb-optimal-price</finalName>
+
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
