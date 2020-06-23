@@ -117,19 +117,6 @@ public class UserServiceImpl
             }
         }
 
-        //         public Listing(
-        //        @NotNull String listingname,
-        //        @NotNull String roomtype,
-        //        @NotNull String location,
-        //        int minnumnights,
-        //        int maxnumguests,
-        //        boolean petsallowed,
-        //        int numrooms,
-        //        int numbeds,
-        //        double optimalPrice,
-        //        int size,
-        //        @NotNull User user)
-
         newUser.getListings()
             .clear();
         for (Listing l : user.getListings())
