@@ -52,17 +52,17 @@ public class Listing extends Auditable
     }
 
     public Listing(
-        @NotNull String listingname,
-        @NotNull String roomtype,
-        @NotNull String location,
+        User user,
+        String listingname,
+        String roomtype,
+        String location,
         int minnumnights,
         int maxnumguests,
         boolean petsallowed,
         int numrooms,
         int numbeds,
         double optimalPrice,
-        int size,
-        @NotNull User user)
+        int size)
     {
         this.listingname = listingname;
         this.roomtype = roomtype;

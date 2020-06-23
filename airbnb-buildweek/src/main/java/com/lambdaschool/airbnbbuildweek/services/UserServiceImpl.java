@@ -117,25 +117,13 @@ public class UserServiceImpl
             }
         }
 
-        //         public Listing(
-        //        @NotNull String listingname,
-        //        @NotNull String roomtype,
-        //        @NotNull String location,
-        //        int minnumnights,
-        //        int maxnumguests,
-        //        boolean petsallowed,
-        //        int numrooms,
-        //        int numbeds,
-        //        double optimalPrice,
-        //        int size,
-        //        @NotNull User user)
-
         newUser.getListings()
             .clear();
         for (Listing l : user.getListings())
         {
             newUser.getListings()
                 .add(new Listing(
+                    newUser,
                     l.getListingname(),
                     l.getRoomtype(),
                     l.getLocation(),
@@ -145,8 +133,7 @@ public class UserServiceImpl
                     l.getNumrooms(),
                     l.getNumbeds(),
                     l.getOptimalPrice(),
-                    l.getSize(),
-                    newUser));
+                    l.getSize()));
         }
 
         return userrepos.save(newUser);
@@ -208,7 +195,9 @@ public class UserServiceImpl
                 for (Listing l : user.getListings())
                 {
                     currentUser.getListings()
-                        .add(new Listing(l.getListingname(),
+                        .add(new Listing(
+                            currentUser,
+                            l.getListingname(),
                             l.getRoomtype(),
                             l.getLocation(),
                             l.getMinnumnights(),
@@ -217,8 +206,7 @@ public class UserServiceImpl
                             l.getNumrooms(),
                             l.getNumbeds(),
                             l.getOptimalPrice(),
-                            l.getSize(),
-                            currentUser));
+                            l.getSize()));
                 }
             }
 
