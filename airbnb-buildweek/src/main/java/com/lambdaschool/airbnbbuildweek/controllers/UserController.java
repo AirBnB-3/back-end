@@ -111,6 +111,7 @@ public class UserController
         response = User.class), @ApiResponse(code = 404,
         message = "User Not Found",
         response = ErrorDetail.class)})
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping(value = "/user",
         consumes = {"application/json"})
     public ResponseEntity<?> addNewUser(
@@ -143,6 +144,7 @@ public class UserController
         response = User.class), @ApiResponse(code = 404,
         message = "User Not Found",
         response = ErrorDetail.class)})
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PutMapping(value = "/user/{userid}",
         consumes = {"application/json"})
     public ResponseEntity<?> updateFullUser(
@@ -172,6 +174,7 @@ public class UserController
         response = ErrorDetail.class)})
     @PatchMapping(value = "/user/{id}",
         consumes = {"application/json"})
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<?> updateUser(
         @ApiParam(value = "a user object with just the information needed to be updated",
             required = true)
@@ -196,6 +199,7 @@ public class UserController
         message = "User Not Found",
         response = ErrorDetail.class)})
     @DeleteMapping(value = "/user/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<?> deleteUserById(
         @ApiParam(value = "userid",
             required = true,
@@ -214,6 +218,7 @@ public class UserController
         response = User.class), @ApiResponse(code = 404,
         message = "User Not Found",
         response = ErrorDetail.class)})
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping(value = "/user/{userid}/role/{roleid}")
     public ResponseEntity<?> deleteUserRoleByIds(
         @ApiParam(value = "userid",
@@ -240,6 +245,7 @@ public class UserController
         response = Void.class), @ApiResponse(code = 404,
         message = "User and / or Role Not Found",
         response = ErrorDetail.class)})
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping(value = "/user/{userid}/role/{roleid}")
     public ResponseEntity<?> postUserRoleByIds(
         @ApiParam(value = "userid",

@@ -123,6 +123,7 @@ public class UserServiceImpl
         {
             newUser.getListings()
                 .add(new Listing(
+                    newUser,
                     l.getListingname(),
                     l.getRoomtype(),
                     l.getLocation(),
@@ -132,8 +133,7 @@ public class UserServiceImpl
                     l.getNumrooms(),
                     l.getNumbeds(),
                     l.getOptimalPrice(),
-                    l.getSize(),
-                    newUser));
+                    l.getSize()));
         }
 
         return userrepos.save(newUser);
@@ -195,7 +195,9 @@ public class UserServiceImpl
                 for (Listing l : user.getListings())
                 {
                     currentUser.getListings()
-                        .add(new Listing(l.getListingname(),
+                        .add(new Listing(
+                            currentUser,
+                            l.getListingname(),
                             l.getRoomtype(),
                             l.getLocation(),
                             l.getMinnumnights(),
@@ -204,8 +206,7 @@ public class UserServiceImpl
                             l.getNumrooms(),
                             l.getNumbeds(),
                             l.getOptimalPrice(),
-                            l.getSize(),
-                            currentUser));
+                            l.getSize()));
                 }
             }
 

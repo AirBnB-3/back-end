@@ -49,6 +49,7 @@ public class SeedData implements CommandLineRunner
 
         u1.getListings()
             .add(new Listing(
+                u1,
                 "Lana Kane's Apartment",
                 "entire place",
                 "New York",
@@ -58,10 +59,10 @@ public class SeedData implements CommandLineRunner
                 2,
                 3,
                 1231.00,
-                736,
-                u1));
+                736));
         u1.getListings()
             .add(new Listing(
+                u1,
                 "Lana Kane's Tropical Paradise",
                 "entire place",
                 "Danger Island",
@@ -71,8 +72,7 @@ public class SeedData implements CommandLineRunner
                 2,
                 3,
                 999.00,
-                1233,
-                u1));
+                1233));
 
         userService.save(u1);
 
@@ -89,6 +89,7 @@ public class SeedData implements CommandLineRunner
 
         u2.getListings()
             .add(new Listing(
+                u2,
                 "Sterling Archer's Penthouse",
                 "entire place",
                 "New York",
@@ -98,8 +99,7 @@ public class SeedData implements CommandLineRunner
                 4,
                 5,
                 1200.00,
-                2430,
-                u2));
+                2430));
 
         userService.save(u2);
 
@@ -114,6 +114,7 @@ public class SeedData implements CommandLineRunner
 
         u3.getListings()
             .add(new Listing(
+                u3,
                 "Cyril Figgis' Apartment",
                 "shared room",
                 "New York",
@@ -123,8 +124,7 @@ public class SeedData implements CommandLineRunner
                 2,
                 2,
                 200.00,
-                945,
-                u3));
+                945));
         userService.save(u3);
 
         User u4 = new User("admin",
@@ -134,6 +134,7 @@ public class SeedData implements CommandLineRunner
 
         u4.getListings()
             .add(new Listing(
+                u4,
                 "Admin's House",
                 "entire place",
                 "Nashville",
@@ -143,10 +144,10 @@ public class SeedData implements CommandLineRunner
                 6,
                 6,
                 400.00,
-                1000,
-                u4));
+                1000));
         u4.getListings()
             .add(new Listing(
+                u4,
                 "Admin's Lakehouse",
                 "entire place",
                 "Lake Cumberland",
@@ -156,8 +157,7 @@ public class SeedData implements CommandLineRunner
                 4,
                 5,
                 340.00,
-                736,
-                u4));
+                736));
 
         userService.save(u4);
     }

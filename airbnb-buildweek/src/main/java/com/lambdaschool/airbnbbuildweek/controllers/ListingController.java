@@ -11,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -53,79 +54,85 @@ public class ListingController
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping(value = "/listing/{listingId}")
+    @PutMapping(value = "/listing/{listingid}",
+        consumes = {"application/json"})
     public ResponseEntity<?> updateListing(
         @PathVariable
-            long listingId,
-        String listingname,
-        String location,
-        int minnumnights,
-        int maxnumguests,
-        boolean petsallowed,
-        int numrooms,
-        int numbeds,
-        double optimalPrice,
-        int size,
-        User user)
+            long listingid,
+        @Valid @RequestBody
+            Listing updateListing)
     {
-        listingService.update(
-            listingId,
-            listingname,
-            location,
-            minnumnights,
-            maxnumguests,
-            petsallowed,
-            numrooms,
-            numbeds,
-            optimalPrice,
-            size,
-            user);
+        updateListing.setListingid(listingid);
+        listingService.save(updateListing);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping(value = "/listing/{listingId}")
-    public ResponseEntity<?> addNewListing(
+    @PostMapping(value = "/user/{userid}", consumes = {"application/json"})
+    public ResponseEntity<?> addNewOrder(
         @PathVariable
-            long listingId,
-        String listingname,
-        String roomtype,
-        String location,
-        int minnumnights,
-        int maxnumguests,
-        boolean petsallowed,
-        int numrooms,
-        int numbeds,
-        double optimalPrice,
-        int size,
-        User user)
-        throws
-        URISyntaxException
+            long userid,
+        @Valid @RequestBody
+            Listing newListing)
     {
-        Listing newListing = listingService.save(
-            listingname,
-            roomtype,
-            location,
-            minnumnights,
-            maxnumguests,
-            petsallowed,
-            numrooms,
-            numbeds,
-            optimalPrice,
-            size,
-            user);
+        newListing.setListingid(0);
+        newListing = listingService.save(newListing);
 
-        // set the location header for the newly created resource
         HttpHeaders responseHeaders = new HttpHeaders();
-        URI newListingURI = ServletUriComponentsBuilder.fromCurrentServletMapping()
-            .path("/listings/listing/{listingId}")
+        // http://localhost:2019/orders/order/newordnum
+        URI newOrderURI = ServletUriComponentsBuilder.fromCurrentRequest()
+            .path("/{listingid}")
             .buildAndExpand(newListing.getListingid())
             .toUri();
-        responseHeaders.setLocation(newListingURI);
+        responseHeaders.setLocation(newOrderURI);
 
-        return new ResponseEntity<>(null,
-            responseHeaders,
-            HttpStatus.CREATED);
+        return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
     }
+
+//    @PostMapping(value = "/user/{userid}",
+//        consumes = {"application/json"})
+//    public ResponseEntity<?> addNewListing(
+//        @PathVariable
+//        long userid,
+//        @Valid
+//        @RequestBody
+//        String listingname,
+//        String roomtype,
+//        String location,
+//        int minnumnights,
+//        int maxnumguests,
+//        boolean petsallowed,
+//        int numrooms,
+//        int numbeds,
+//        double optimalPrice,
+//        int size)
+//        throws
+//        URISyntaxException
+//    {
+//        Listing newListing = listingService.save(
+//            userid,
+//            listingname,
+//            roomtype,
+//            location,
+//            minnumnights,
+//            maxnumguests,
+//            petsallowed,
+//            numrooms,
+//            numbeds,
+//            optimalPrice,
+//            size);
+//
+//        // set the location header for the newly created resource
+//        HttpHeaders responseHeaders = new HttpHeaders();
+//        URI newListingURI = ServletUriComponentsBuilder.fromCurrentServletMapping()
+//            .path("/listings/listing/{listingid}")
+//            .buildAndExpand(newListing.getListingid())
+//            .toUri();
+//        responseHeaders.setLocation(newListingURI);
+//
+//        return new ResponseEntity<>(null,
+//            responseHeaders,
+//            HttpStatus.CREATED);
+//    }
 
     @GetMapping(value = "/{userName}",
         produces = {"application/json"})

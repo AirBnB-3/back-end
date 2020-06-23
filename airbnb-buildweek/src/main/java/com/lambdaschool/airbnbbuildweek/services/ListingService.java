@@ -15,29 +15,9 @@ public interface ListingService
 
     Listing update(
         long listingid,
-        String listingname,
-        String location,
-        int minnumnights,
-        int maxnumguests,
-        boolean petsallowed,
-        int numrooms,
-        int numbeds,
-        double optimalPrice,
-        int size,
-        User user);
+        Listing updateListing);
 
-    Listing save(
-        String listingname,
-        String roomtype,
-        String location,
-        int minnumnights,
-        int maxnumguests,
-        boolean petsallowed,
-        int numrooms,
-        int numbeds,
-        double optimalPrice,
-        int size,
-        User user);
+    Listing save(Listing listing);
 
     List<Listing> findByUserName(String username);
 }

@@ -116,7 +116,9 @@ public class UserServiceImplTest
             "tiger@school.lambda",
             datas);
         u2.getListings()
-            .add(new Listing("Tiger's House",
+            .add(new Listing(
+                u2,
+                "Tiger's House",
                 "entire place",
                 "Mumbai",
                 2,
@@ -125,8 +127,7 @@ public class UserServiceImplTest
                 0,
                 2,
                 230.00,
-                14000,
-                u2));
+                14000));
 
         User saveU2 = userService.save(u2);
 
