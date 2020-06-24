@@ -112,22 +112,22 @@ public class UserServiceImplTest
     {
         ArrayList<UserRoles> datas = new ArrayList<>();
         User u2 = new User("tiger",
+            "Tony",
+            "Tiger",
             "ILuvMath!",
             "tiger@school.lambda",
             datas);
+
         u2.getListings()
             .add(new Listing(
                 u2,
                 "Tiger's House",
                 "entire place",
+                "12345",
                 "Mumbai",
+                "Malad",
                 2,
-                8,
-                true,
-                0,
-                2,
-                230.00,
-                14000));
+                230.00));
 
         User saveU2 = userService.save(u2);
 

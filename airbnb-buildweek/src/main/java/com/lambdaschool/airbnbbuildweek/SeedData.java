@@ -43,6 +43,8 @@ public class SeedData implements CommandLineRunner
         admins.add(new UserRoles(new User(),
             r3));
         User u1 = new User("lanakane",
+            "Lana",
+            "Kane",
             "password",
             "lana.kane@figgisagency.local",
             admins);
@@ -52,27 +54,21 @@ public class SeedData implements CommandLineRunner
                 u1,
                 "Lana Kane's Apartment",
                 "entire place",
+                "38291",
                 "New York",
+                "Manhattan",
                 2,
-                6,
-                false,
-                2,
-                3,
-                1231.00,
-                736));
+                1231.00));
         u1.getListings()
             .add(new Listing(
                 u1,
                 "Lana Kane's Tropical Paradise",
                 "entire place",
+                "11111",
+                "Polynesia",
                 "Danger Island",
                 2,
-                6,
-                false,
-                2,
-                3,
-                999.00,
-                1233));
+                999.00));
 
         userService.save(u1);
 
@@ -83,6 +79,8 @@ public class SeedData implements CommandLineRunner
         datas.add(new UserRoles(new User(),
             r2));
         User u2 = new User("sterlingarcher",
+            "Sterling",
+            "Archer",
             "1234567",
             "sterling.archer@figgisagency.com",
             datas);
@@ -92,14 +90,11 @@ public class SeedData implements CommandLineRunner
                 u2,
                 "Sterling Archer's Penthouse",
                 "entire place",
+                "97423",
                 "New York",
+                "Manhattan",
                 3,
-                9,
-                true,
-                4,
-                5,
-                1200.00,
-                2430));
+                1200.00));
 
         userService.save(u2);
 
@@ -108,6 +103,8 @@ public class SeedData implements CommandLineRunner
         users.add(new UserRoles(new User(),
             r2));
         User u3 = new User("cyrilfiggis",
+            "Cyril",
+            "Figgis",
             "password",
             "cyril.figgis@figgisagency.com",
             users);
@@ -117,17 +114,16 @@ public class SeedData implements CommandLineRunner
                 u3,
                 "Cyril Figgis' Apartment",
                 "shared room",
+                "23412",
                 "New York",
-                1,
-                3,
-                true,
+                "Manhattan",
                 2,
-                2,
-                200.00,
-                945));
+                200.00));
         userService.save(u3);
 
         User u4 = new User("admin",
+            "Admin",
+            "Admin",
             "password",
             "admin@figgisagency.local",
             admins);
@@ -137,27 +133,21 @@ public class SeedData implements CommandLineRunner
                 u4,
                 "Admin's House",
                 "entire place",
+                "37243",
                 "Nashville",
-                2,
-                12,
-                true,
+                "Germantown",
                 6,
-                6,
-                400.00,
-                1000));
+                400.00));
         u4.getListings()
             .add(new Listing(
                 u4,
                 "Admin's Lakehouse",
                 "entire place",
+                "12345",
+                "Eastern Tennessee",
                 "Lake Cumberland",
-                2,
-                9,
-                true,
-                4,
                 5,
-                340.00,
-                736));
+                340.00));
 
         userService.save(u4);
     }

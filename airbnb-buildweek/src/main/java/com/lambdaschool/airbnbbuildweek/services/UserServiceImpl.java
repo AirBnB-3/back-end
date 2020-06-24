@@ -91,6 +91,8 @@ public class UserServiceImpl
 
         newUser.setUsername(user.getUsername()
             .toLowerCase());
+        newUser.setFirstname(user.getFirstname());
+        newUser.setLastname(user.getLastname());
         newUser.setPasswordNoEncrypt(user.getPassword());
         newUser.setPrimaryemail(user.getPrimaryemail()
             .toLowerCase());
@@ -117,6 +119,15 @@ public class UserServiceImpl
             }
         }
 
+        //                @NotNull User user,
+        //        @NotNull String listingname,
+        //        @NotNull String roomtype,
+        //        @NotNull String zipcode,
+        //        String neighborhoodgroup,
+        //        String neighborhood,
+        //        int minnumnights,
+        //        double optimalPrice)
+
         newUser.getListings()
             .clear();
         for (Listing l : user.getListings())
@@ -126,14 +137,11 @@ public class UserServiceImpl
                     newUser,
                     l.getListingname(),
                     l.getRoomtype(),
-                    l.getLocation(),
+                    l.getZipcode(),
+                    l.getNeighborhoodgroup(),
+                    l.getNeighborhood(),
                     l.getMinnumnights(),
-                    l.getMaxnumguests(),
-                    l.isPetsallowed(),
-                    l.getNumrooms(),
-                    l.getNumbeds(),
-                    l.getOptimalPrice(),
-                    l.getSize()));
+                    l.getOptimalPrice()));
         }
 
         return userrepos.save(newUser);
@@ -153,6 +161,16 @@ public class UserServiceImpl
             {
                 currentUser.setUsername(user.getUsername()
                     .toLowerCase());
+            }
+
+            if (user.getFirstname() != null)
+            {
+                currentUser.setFirstname(user.getFirstname());
+            }
+
+            if (user.getLastname() != null)
+            {
+                currentUser.setLastname(user.getLastname());
             }
 
             if (user.getPassword() != null)
@@ -199,14 +217,11 @@ public class UserServiceImpl
                             currentUser,
                             l.getListingname(),
                             l.getRoomtype(),
-                            l.getLocation(),
+                            l.getZipcode(),
+                            l.getNeighborhoodgroup(),
+                            l.getNeighborhood(),
                             l.getMinnumnights(),
-                            l.getMaxnumguests(),
-                            l.isPetsallowed(),
-                            l.getNumrooms(),
-                            l.getNumbeds(),
-                            l.getOptimalPrice(),
-                            l.getSize()));
+                            l.getOptimalPrice()));
                 }
             }
 

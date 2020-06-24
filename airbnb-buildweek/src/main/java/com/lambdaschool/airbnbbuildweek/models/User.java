@@ -48,7 +48,6 @@ public class User
         example = "Some Name")
     @Size(min = 2,
         message = "First name must be greater than 1 character")
-    @NotNull
     @Column(nullable = false)
     private String firstname;
 
@@ -58,7 +57,6 @@ public class User
         example = "Some Name")
     @Size(min = 2,
         message = "Last name must be greater than 1 character")
-    @NotNull
     @Column(nullable = false)
     private String lastname;
 
@@ -118,7 +116,7 @@ public class User
         setLastname(lastname);
         setPassword(password);
         setPrimaryemail(primaryemail);
-        
+
         for (UserRoles ur : userRoles)
         {
             ur.setUser(this);

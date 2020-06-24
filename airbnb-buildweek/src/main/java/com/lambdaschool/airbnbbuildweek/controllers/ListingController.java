@@ -68,7 +68,7 @@ public class ListingController
     }
 
     @PostMapping(value = "/user/{userid}", consumes = {"application/json"})
-    public ResponseEntity<?> addNewOrder(
+    public ResponseEntity<?> addNewListing(
         @PathVariable
             long userid,
         @Valid @RequestBody

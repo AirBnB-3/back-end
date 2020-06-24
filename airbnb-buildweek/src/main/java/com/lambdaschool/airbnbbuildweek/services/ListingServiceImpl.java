@@ -136,17 +136,17 @@ public class ListingServiceImpl implements ListingService
                 .getUser()
                 .getUsername()))
             {
+
                 Listing listing = findListingById(listingid);
 
-                listing.setListingname(updateListing.getListingname());
-                listing.setMinnumnights(updateListing.getMinnumnights());
-                listing.setMaxnumguests(updateListing.getMaxnumguests());
-                listing.setPetsallowed(updateListing.isPetsallowed());
-                listing.setNumrooms(updateListing.getNumrooms());
-                listing.setNumbeds(updateListing.getNumbeds());
-                listing.setOptimalPrice(updateListing.getOptimalPrice());
-                listing.setSize(updateListing.getSize());
                 listing.setUser(updateListing.getUser());
+                listing.setListingname(updateListing.getListingname());
+                listing.setRoomtype(updateListing.getRoomtype());
+                listing.setZipcode(updateListing.getZipcode());
+                listing.setNeighborhoodgroup(updateListing.getNeighborhoodgroup());
+                listing.setNeighborhood(updateListing.getNeighborhood());
+                listing.setMinnumnights(updateListing.getMinnumnights());
+                listing.setOptimalPrice(updateListing.getOptimalPrice());
                 return listingrepos.save(listing);
             } else
             {
@@ -223,14 +223,11 @@ public class ListingServiceImpl implements ListingService
                     .orElseThrow(() -> new EntityNotFoundException("User " + listing.getUser().getUserid() + " Not Found")));
                 newListing.setListingname(listing.getListingname());
                 newListing.setRoomtype(listing.getRoomtype());
-                newListing.setLocation(listing.getLocation());
+                newListing.setZipcode(listing.getZipcode());
+                newListing.setNeighborhoodgroup(listing.getNeighborhoodgroup());
+                newListing.setNeighborhood(listing.getNeighborhood());
                 newListing.setMinnumnights(listing.getMinnumnights());
-                newListing.setMaxnumguests(listing.getMaxnumguests());
-                newListing.setPetsallowed(listing.isPetsallowed());
-                newListing.setNumrooms(listing.getNumrooms());
-                newListing.setNumbeds(listing.getNumbeds());
                 newListing.setOptimalPrice(listing.getOptimalPrice());
-                newListing.setSize(listing.getSize());
 
                 return listingrepos.save(newListing);
             } else

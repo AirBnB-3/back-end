@@ -23,21 +23,15 @@ public class Listing extends Auditable
 
     @NotNull
     @Column(nullable = false)
-    private String location;
+    private String zipcode;
+
+    private String neighborhoodgroup;
+
+    private String neighborhood;
 
     private int minnumnights;
 
-    private int maxnumguests;
-
-    private boolean petsallowed = false;
-
-    private int numrooms;
-
-    private int numbeds;
-
     private double optimalPrice;
-
-    private int size;
 
     @ManyToOne
     @NotNull
@@ -52,29 +46,23 @@ public class Listing extends Auditable
     }
 
     public Listing(
-        User user,
-        String listingname,
-        String roomtype,
-        String location,
+        @NotNull User user,
+        @NotNull String listingname,
+        @NotNull String roomtype,
+        @NotNull String zipcode,
+        String neighborhoodgroup,
+        String neighborhood,
         int minnumnights,
-        int maxnumguests,
-        boolean petsallowed,
-        int numrooms,
-        int numbeds,
-        double optimalPrice,
-        int size)
+        double optimalPrice)
     {
+        this.user = user;
         this.listingname = listingname;
         this.roomtype = roomtype;
-        this.location = location;
+        this.zipcode = zipcode;
+        this.neighborhoodgroup = neighborhoodgroup;
+        this.neighborhood = neighborhood;
         this.minnumnights = minnumnights;
-        this.maxnumguests = maxnumguests;
-        this.petsallowed = petsallowed;
-        this.numrooms = numrooms;
-        this.numbeds = numbeds;
         this.optimalPrice = optimalPrice;
-        this.size = size;
-        this.user = user;
     }
 
     public long getListingid()
@@ -107,14 +95,34 @@ public class Listing extends Auditable
         this.roomtype = roomtype;
     }
 
-    public String getLocation()
+    public String getZipcode()
     {
-        return location;
+        return zipcode;
     }
 
-    public void setLocation(String location)
+    public void setZipcode(String zipcode)
     {
-        this.location = location;
+        this.zipcode = zipcode;
+    }
+
+    public String getNeighborhoodgroup()
+    {
+        return neighborhoodgroup;
+    }
+
+    public void setNeighborhoodgroup(String neighborhoodgroup)
+    {
+        this.neighborhoodgroup = neighborhoodgroup;
+    }
+
+    public String getNeighborhood()
+    {
+        return neighborhood;
+    }
+
+    public void setNeighborhood(String neighborhood)
+    {
+        this.neighborhood = neighborhood;
     }
 
     public int getMinnumnights()
@@ -127,46 +135,6 @@ public class Listing extends Auditable
         this.minnumnights = minnumnights;
     }
 
-    public int getMaxnumguests()
-    {
-        return maxnumguests;
-    }
-
-    public void setMaxnumguests(int maxnumguests)
-    {
-        this.maxnumguests = maxnumguests;
-    }
-
-    public boolean isPetsallowed()
-    {
-        return petsallowed;
-    }
-
-    public void setPetsallowed(boolean petsallowed)
-    {
-        this.petsallowed = petsallowed;
-    }
-
-    public int getNumrooms()
-    {
-        return numrooms;
-    }
-
-    public void setNumrooms(int numrooms)
-    {
-        this.numrooms = numrooms;
-    }
-
-    public int getNumbeds()
-    {
-        return numbeds;
-    }
-
-    public void setNumbeds(int numbeds)
-    {
-        this.numbeds = numbeds;
-    }
-
     public double getOptimalPrice()
     {
         return optimalPrice;
@@ -175,16 +143,6 @@ public class Listing extends Auditable
     public void setOptimalPrice(double optimalPrice)
     {
         this.optimalPrice = optimalPrice;
-    }
-
-    public int getSize()
-    {
-        return size;
-    }
-
-    public void setSize(int size)
-    {
-        this.size = size;
     }
 
     public User getUser()
@@ -204,14 +162,11 @@ public class Listing extends Auditable
             "listingid=" + listingid +
             ", listingname='" + listingname + '\'' +
             ", roomtype='" + roomtype + '\'' +
-            ", location='" + location + '\'' +
+            ", zipcode='" + zipcode + '\'' +
+            ", neighborhoodgroup='" + neighborhoodgroup + '\'' +
+            ", neighborhood='" + neighborhood + '\'' +
             ", minnumnights=" + minnumnights +
-            ", maxnumguests=" + maxnumguests +
-            ", petsallowed=" + petsallowed +
-            ", numrooms=" + numrooms +
-            ", numbeds=" + numbeds +
             ", optimalPrice=" + optimalPrice +
-            ", size=" + size +
             ", user=" + user +
             '}';
     }

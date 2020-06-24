@@ -46,6 +46,8 @@ public class OpenController
         User newuser = new User();
 
         newuser.setUsername(newminuser.getUsername());
+        newuser.setFirstname(newminuser.getFirstname());
+        newuser.setLastname(newminuser.getLastname());
         newuser.setPassword(newminuser.getPassword());
         newuser.setPrimaryemail(newminuser.getPrimaryemail());
 
@@ -93,6 +95,10 @@ public class OpenController
             "read write trust");
         map.add("username",
             newminuser.getUsername());
+        map.add("firstname",
+            newminuser.getFirstname());
+        map.add("lastname",
+            newminuser.getLastname());
         map.add("password",
             newminuser.getPassword());
 
