@@ -13,9 +13,7 @@ public interface ListingService
 
     void delete(long id);
 
-    Listing update(
-        long listingid,
-        Listing updateListing);
+    Listing update(Listing updateListing, long listingid);
 
     Listing save(Listing listing);
 

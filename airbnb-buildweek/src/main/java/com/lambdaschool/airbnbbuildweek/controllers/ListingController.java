@@ -1,8 +1,13 @@
 package com.lambdaschool.airbnbbuildweek.controllers;
 
+import com.lambdaschool.airbnbbuildweek.models.ErrorDetail;
 import com.lambdaschool.airbnbbuildweek.models.Listing;
 import com.lambdaschool.airbnbbuildweek.models.User;
 import com.lambdaschool.airbnbbuildweek.services.ListingService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -67,6 +72,31 @@ public class ListingController
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @ApiOperation(value = "updates a listing with the information given in the request body",
+        response = Void.class)
+    @ApiResponses(value = {@ApiResponse(code = 200,
+        message = "Listing Found",
+        response = User.class), @ApiResponse(code = 404,
+        message = "Listing Not Found",
+        response = ErrorDetail.class)})
+    @PatchMapping(value = "/listing/{listingid}",
+        consumes = {"application/json"})
+    @PreAuthorize("hasAnyRole('USER')") // this may break
+    public ResponseEntity<?> updateListing(
+        @ApiParam(value = "a listing object with just the information needed to be updated",
+            required = true)
+        @RequestBody
+            Listing updateListing,
+        @ApiParam(value = "listingid",
+            required = true,
+            example = "4")
+        @PathVariable
+            long listingid)
+    {
+        listingService.update(updateListing, listingid);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @PostMapping(value = "/user/{userid}", consumes = {"application/json"})
     public ResponseEntity<?> addNewListing(
         @PathVariable
@@ -87,52 +117,6 @@ public class ListingController
 
         return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
     }
-
-//    @PostMapping(value = "/user/{userid}",
-//        consumes = {"application/json"})
-//    public ResponseEntity<?> addNewListing(
-//        @PathVariable
-//        long userid,
-//        @Valid
-//        @RequestBody
-//        String listingname,
-//        String roomtype,
-//        String location,
-//        int minnumnights,
-//        int maxnumguests,
-//        boolean petsallowed,
-//        int numrooms,
-//        int numbeds,
-//        double optimalPrice,
-//        int size)
-//        throws
-//        URISyntaxException
-//    {
-//        Listing newListing = listingService.save(
-//            userid,
-//            listingname,
-//            roomtype,
-//            location,
-//            minnumnights,
-//            maxnumguests,
-//            petsallowed,
-//            numrooms,
-//            numbeds,
-//            optimalPrice,
-//            size);
-//
-//        // set the location header for the newly created resource
-//        HttpHeaders responseHeaders = new HttpHeaders();
-//        URI newListingURI = ServletUriComponentsBuilder.fromCurrentServletMapping()
-//            .path("/listings/listing/{listingid}")
-//            .buildAndExpand(newListing.getListingid())
-//            .toUri();
-//        responseHeaders.setLocation(newListingURI);
-//
-//        return new ResponseEntity<>(null,
-//            responseHeaders,
-//            HttpStatus.CREATED);
-//    }
 
     @GetMapping(value = "/{userName}",
         produces = {"application/json"})

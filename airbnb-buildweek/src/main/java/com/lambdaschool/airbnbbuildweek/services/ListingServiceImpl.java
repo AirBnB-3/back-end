@@ -4,6 +4,7 @@ import com.lambdaschool.airbnbbuildweek.exceptions.ResourceNotFoundException;
 import com.lambdaschool.airbnbbuildweek.handlers.HelperFunctions;
 import com.lambdaschool.airbnbbuildweek.models.Listing;
 import com.lambdaschool.airbnbbuildweek.models.User;
+import com.lambdaschool.airbnbbuildweek.models.UserRoles;
 import com.lambdaschool.airbnbbuildweek.repository.ListingRepository;
 import com.lambdaschool.airbnbbuildweek.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -122,42 +123,108 @@ public class ListingServiceImpl implements ListingService
 //        }
 //    }
 
+//    @Transactional
+//    @Override
+//    public Listing update(
+//        Listing updateListing,
+//        long listingid)
+//    {
+//        if (listingrepos.findById(listingid)
+//            .isPresent())
+//        {
+//            if (helper.isAuthorizedToMakeChange(listingrepos.findById(listingid)
+//                .get()
+//                .getUser()
+//                .getUsername()))
+//            {
+//
+//                Listing listing = findListingById(listingid);
+//
+//                listing.setUser(updateListing.getUser());
+//                listing.setListingname(updateListing.getListingname());
+//                listing.setRoomtype(updateListing.getRoomtype());
+//                listing.setZipcode(updateListing.getZipcode());
+//                listing.setNeighborhoodgroup(updateListing.getNeighborhoodgroup());
+//                listing.setNeighborhood(updateListing.getNeighborhood());
+//                listing.setMinnumnights(updateListing.getMinnumnights());
+//                listing.setOptimalPrice(updateListing.getOptimalPrice());
+//                return listingrepos.save(listing);
+//            } else
+//            {
+//                // note we should never get to this line but is needed for the compiler
+//                // to recognize that this exception can be thrown
+//                throw new ResourceNotFoundException("This user is not authorized to make change");
+//            }
+//        } else
+//        {
+//            throw new ResourceNotFoundException("Listing with id " + listingid + " Not Found!");
+//        }
+//    }
+
     @Transactional
     @Override
     public Listing update(
-        long listingid,
-        Listing updateListing)
+        Listing updateListing,
+        long listingid)
     {
-        if (listingrepos.findById(listingid)
-            .isPresent())
-        {
-            if (helper.isAuthorizedToMakeChange(listingrepos.findById(listingid)
-                .get()
-                .getUser()
-                .getUsername()))
-            {
+//        User currentUser = userService.getCurrentUserInfo(id);
+          Listing currentListing = listingService.findListingById(listingid);
+//
+//                  @NotNull User user,
+        //        @NotNull String listingname,
+        //        @NotNull String roomtype,
+        //        @NotNull String zipcode,
+        //        String neighborhoodgroup,
+        //        String neighborhood,
+        //        int minnumnights,
+        //        double optimalPrice)
 
-                Listing listing = findListingById(listingid);
-
-                listing.setUser(updateListing.getUser());
-                listing.setListingname(updateListing.getListingname());
-                listing.setRoomtype(updateListing.getRoomtype());
-                listing.setZipcode(updateListing.getZipcode());
-                listing.setNeighborhoodgroup(updateListing.getNeighborhoodgroup());
-                listing.setNeighborhood(updateListing.getNeighborhood());
-                listing.setMinnumnights(updateListing.getMinnumnights());
-                listing.setOptimalPrice(updateListing.getOptimalPrice());
-                return listingrepos.save(listing);
-            } else
+//        if (helper.isAuthorizedToMakeChange(currentUser.getUsername()))
+//        {
+            if (updateListing.getListingname() != null)
             {
-                // note we should never get to this line but is needed for the compiler
-                // to recognize that this exception can be thrown
-                throw new ResourceNotFoundException("This user is not authorized to make change");
+                currentListing.setListingname(updateListing.getListingname());
             }
-        } else
-        {
-            throw new ResourceNotFoundException("Listing with id " + listingid + " Not Found!");
-        }
+
+            if (updateListing.getRoomtype() != null)
+            {
+                currentListing.setRoomtype(updateListing.getRoomtype());
+            }
+
+            if (updateListing.getZipcode() != null)
+            {
+                currentListing.setZipcode(updateListing.getZipcode());
+            }
+
+            if (updateListing.getNeighborhoodgroup() != null)
+            {
+                currentListing.setNeighborhoodgroup(updateListing.getNeighborhoodgroup());
+            }
+
+            if (updateListing.getNeighborhood() != null)
+            {
+                currentListing.setNeighborhood(updateListing.getNeighborhood());
+            }
+
+            if (updateListing.getMinnumnights() != 0)
+            {
+                currentListing.setMinnumnights(updateListing.getMinnumnights());
+            }
+
+            if (updateListing.getOptimalPrice() != 0)
+            {
+                currentListing.setOptimalPrice(updateListing.getOptimalPrice());
+            }
+
+            return listingrepos.save(currentListing);
+//        } else
+//        {
+//            {
+//                // note we should never get to this line but is needed for the compiler
+//                // to recognize that this exception can be thrown
+//                throw new ResourceNotFoundException("This user is not authorized to make change");
+//            }
+//        }
     }
 
 //    @Transactional
