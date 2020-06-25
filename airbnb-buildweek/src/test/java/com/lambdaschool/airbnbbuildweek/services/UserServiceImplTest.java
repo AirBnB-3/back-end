@@ -121,12 +121,13 @@ public class UserServiceImplTest
         u2.getListings()
             .add(new Listing(
                 u2,
-                "Tiger's House",
+//                "Tiger's House",
                 "entire place",
-                "12345",
-                "Mumbai",
+//                "12345",
+//                "Mumbai",
                 "Malad",
                 2,
+                4,
                 230.00));
 
         User saveU2 = userService.save(u2);
@@ -135,10 +136,10 @@ public class UserServiceImplTest
         System.out.println(saveU2);
         System.out.println("*** DATA ***");
 
-        assertEquals("Tiger's House",
+        assertEquals("Malad",
             saveU2.getListings()
                 .get(0)
-                .getListingname());
+                .getNeighbourhood());
     }
 
     //    @Transactional

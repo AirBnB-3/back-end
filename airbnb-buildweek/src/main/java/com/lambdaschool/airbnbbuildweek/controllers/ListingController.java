@@ -18,7 +18,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
@@ -59,18 +58,19 @@ public class ListingController
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping(value = "/listing/{listingid}",
-        consumes = {"application/json"})
-    public ResponseEntity<?> updateListing(
-        @PathVariable
-            long listingid,
-        @Valid @RequestBody
-            Listing updateListing)
-    {
-        updateListing.setListingid(listingid);
-        listingService.save(updateListing);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+//    @PutMapping(value = "/listing/{listingid}",
+//        consumes = {"application/json"})
+//    public ResponseEntity<?> updateListing(
+//        @PathVariable
+//            long listingid,
+//        @Valid
+//        @RequestBody
+//            Listing updateListing)
+//    {
+//        updateListing.setListingid(listingid);
+//        listingService.save(userrepos, updateListing);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 
     @ApiOperation(value = "updates a listing with the information given in the request body",
         response = Void.class)
@@ -93,19 +93,22 @@ public class ListingController
         @PathVariable
             long listingid)
     {
-        listingService.update(updateListing, listingid);
+        listingService.update(updateListing,
+            listingid);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping(value = "/user/{userid}", consumes = {"application/json"})
+    @PostMapping(value = "/user/{userid}",
+        consumes = {"application/json"})
     public ResponseEntity<?> addNewListing(
         @PathVariable
             long userid,
-        @Valid @RequestBody
+        @Valid
+        @RequestBody
             Listing newListing)
     {
         newListing.setListingid(0);
-        newListing = listingService.save(newListing);
+        newListing = listingService.save(userid, newListing);
 
         HttpHeaders responseHeaders = new HttpHeaders();
         // http://localhost:2019/orders/order/newordnum
@@ -115,7 +118,9 @@ public class ListingController
             .toUri();
         responseHeaders.setLocation(newOrderURI);
 
-        return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
+        return new ResponseEntity<>(null,
+            responseHeaders,
+            HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/{userName}",

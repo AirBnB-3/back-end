@@ -5,8 +5,11 @@ import javax.validation.constraints.Email;
 public class UserMinimum
 {
     private String username;
+
     private String firstname;
+
     private String lastname;
+
     private String password;
 
     @Email

@@ -135,12 +135,10 @@ public class UserServiceImpl
             newUser.getListings()
                 .add(new Listing(
                     newUser,
-                    l.getListingname(),
                     l.getRoomtype(),
-                    l.getZipcode(),
-                    l.getNeighborhoodgroup(),
-                    l.getNeighborhood(),
+                    l.getNeighbourhood(),
                     l.getMinnumnights(),
+                    l.getAccomodates(),
                     l.getOptimalPrice()));
         }
 
@@ -215,12 +213,10 @@ public class UserServiceImpl
                     currentUser.getListings()
                         .add(new Listing(
                             currentUser,
-                            l.getListingname(),
                             l.getRoomtype(),
-                            l.getZipcode(),
-                            l.getNeighborhoodgroup(),
-                            l.getNeighborhood(),
+                            l.getNeighbourhood(),
                             l.getMinnumnights(),
+                            l.getAccomodates(),
                             l.getOptimalPrice()));
                 }
             }

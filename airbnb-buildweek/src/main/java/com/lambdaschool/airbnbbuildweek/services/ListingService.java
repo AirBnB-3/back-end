@@ -1,7 +1,6 @@
 package com.lambdaschool.airbnbbuildweek.services;
 
 import com.lambdaschool.airbnbbuildweek.models.Listing;
-import com.lambdaschool.airbnbbuildweek.models.User;
 
 import java.util.List;
 
@@ -13,9 +12,11 @@ public interface ListingService
 
     void delete(long id);
 
-    Listing update(Listing updateListing, long listingid);
+    Listing update(
+        Listing updateListing,
+        long listingid);
 
-    Listing save(Listing listing);
+    Listing save(long userid, Listing listing);
 
     List<Listing> findByUserName(String username);
 }

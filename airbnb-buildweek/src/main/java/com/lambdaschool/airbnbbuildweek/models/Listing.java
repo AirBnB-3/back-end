@@ -15,26 +15,17 @@ public class Listing extends Auditable
 
     @NotNull
     @Column(nullable = false)
-    private String listingname;
-
-    @NotNull
-    @Column(nullable = false)
     private String roomtype;
 
-    @NotNull
-    @Column(nullable = false)
-    private String zipcode;
-
-    private String neighborhoodgroup;
-
-    private String neighborhood;
+    private String neighbourhood;
 
     private int minnumnights;
+
+    private int accomodates;
 
     private double optimalPrice;
 
     @ManyToOne
-    @NotNull
     @JoinColumn(name = "userid",
         nullable = false)
     @JsonIgnoreProperties(value = "listings",
@@ -46,22 +37,32 @@ public class Listing extends Auditable
     }
 
     public Listing(
-        @NotNull User user,
-        @NotNull String listingname,
         @NotNull String roomtype,
-        @NotNull String zipcode,
-        String neighborhoodgroup,
-        String neighborhood,
+        String neighbourhood,
         int minnumnights,
+        int accomodates,
+        double optimalPrice)
+    {
+        this.roomtype = roomtype;
+        this.neighbourhood = neighbourhood;
+        this.minnumnights = minnumnights;
+        this.accomodates = accomodates;
+        this.optimalPrice = optimalPrice;
+    }
+
+    public Listing(
+        @NotNull User user,
+        @NotNull String roomtype,
+        String neighbourhood,
+        int minnumnights,
+        int accomodates,
         double optimalPrice)
     {
         this.user = user;
-        this.listingname = listingname;
         this.roomtype = roomtype;
-        this.zipcode = zipcode;
-        this.neighborhoodgroup = neighborhoodgroup;
-        this.neighborhood = neighborhood;
+        this.neighbourhood = neighbourhood;
         this.minnumnights = minnumnights;
+        this.accomodates = accomodates;
         this.optimalPrice = optimalPrice;
     }
 
@@ -75,16 +76,6 @@ public class Listing extends Auditable
         this.listingid = listingid;
     }
 
-    public String getListingname()
-    {
-        return listingname;
-    }
-
-    public void setListingname(String listingname)
-    {
-        this.listingname = listingname;
-    }
-
     public String getRoomtype()
     {
         return roomtype;
@@ -95,34 +86,14 @@ public class Listing extends Auditable
         this.roomtype = roomtype;
     }
 
-    public String getZipcode()
+    public String getNeighbourhood()
     {
-        return zipcode;
+        return neighbourhood;
     }
 
-    public void setZipcode(String zipcode)
+    public void setNeighbourhood(String neighbourhood)
     {
-        this.zipcode = zipcode;
-    }
-
-    public String getNeighborhoodgroup()
-    {
-        return neighborhoodgroup;
-    }
-
-    public void setNeighborhoodgroup(String neighborhoodgroup)
-    {
-        this.neighborhoodgroup = neighborhoodgroup;
-    }
-
-    public String getNeighborhood()
-    {
-        return neighborhood;
-    }
-
-    public void setNeighborhood(String neighborhood)
-    {
-        this.neighborhood = neighborhood;
+        this.neighbourhood = neighbourhood;
     }
 
     public int getMinnumnights()
@@ -133,6 +104,16 @@ public class Listing extends Auditable
     public void setMinnumnights(int minnumnights)
     {
         this.minnumnights = minnumnights;
+    }
+
+    public int getAccomodates()
+    {
+        return accomodates;
+    }
+
+    public void setAccomodates(int accomodates)
+    {
+        this.accomodates = accomodates;
     }
 
     public double getOptimalPrice()
@@ -160,12 +141,10 @@ public class Listing extends Auditable
     {
         return "Listing{" +
             "listingid=" + listingid +
-            ", listingname='" + listingname + '\'' +
             ", roomtype='" + roomtype + '\'' +
-            ", zipcode='" + zipcode + '\'' +
-            ", neighborhoodgroup='" + neighborhoodgroup + '\'' +
-            ", neighborhood='" + neighborhood + '\'' +
+            ", neighbourhood='" + neighbourhood + '\'' +
             ", minnumnights=" + minnumnights +
+            ", accomodates=" + accomodates +
             ", optimalPrice=" + optimalPrice +
             ", user=" + user +
             '}';
